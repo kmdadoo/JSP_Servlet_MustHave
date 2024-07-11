@@ -54,7 +54,7 @@ alter table board
 
 --  시퀀스 생성
 create sequence seq_board_num
-    increment by 1  -- 1 식 증가
+    increment by 1  -- 1씩 증가
     start with 1    -- 시작값 1
     minvalue 1      -- 최소값 1
     nomaxvalue      -- 최대값은 무한대
@@ -71,5 +71,17 @@ INSERT INTO board VALUES (seq_board_num.nextval, '지금은 봄입니다', '봄�
 INSERT INTO board VALUES (seq_board_num.nextval, '지금은 여름입니다', '여름향기', 'musthave', sysdate, 0);
 INSERT INTO board VALUES (seq_board_num.nextval, '지금은 가을입니다', '가을동화', 'musthave', sysdate, 0);
 INSERT INTO board VALUES (seq_board_num.nextval, '지금은 겨울입니다', '겨울연가', 'musthave', sysdate, 0);
+commit;
+
+-- 9장 페이징
+DESC member;
+
+SELECT * FROM member;
+SELECT id, pass, rownum FROM member;
+
+SELECT * 
+ FROM (SELECT Tb.*, rownum rNum 
+        FROM (SELECT * FROM board ORDER BY num DESC) Tb)
+ WHERE rNum BETWEEN 1 AND 10;
 
 

@@ -73,7 +73,35 @@
 <!-- 	   <session-timeout>20</session-timeout> -->
 <!-- 	</session-config> -->
 		
+	<!-- 
+		한글깨짐에 대한 필터 설정 : 현재 개발중인 웹 애프리케이션 전체에 해당
+			필터를 적용한다. 웹 애플리케이션으로 들어오는 모든 요청에 대해
+			문자 인코딩을 UTF-8로 하겠다는 필터 설정이다. 
+	 -->
+	<filter>
+    	<filter-name>SetCharEncoding</filter-name>
+   		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+	   <init-param>
+	     <param-name>encoding</param-name>
+	     <param-value>utf-8</param-value>
+	   </init-param>
+ 	</filter>
+	<filter-mapping>
+	  <filter-name>SetCharEncoding</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping>
 	
+	<!-- 게시판 페이징 처리를 위한 파라미터 추가 [예제9-3]-->
+	<!-- 한페이지에 출력할 게시물의 갯수 설정 : 10개씩 출력 -->
+	<context-param>
+		<param-name>POSTS_PER_PAGE</param-name>
+		<param-value>10</param-value>
+	</context-param>
+	<!-- 한블럭당 출력할 페이지번호의 갯수 설정 : 5페이지씩 출력 -->
+	<context-param>
+		<param-name>PAGES_PER_BLOCK</param-name>
+		<param-value>5</param-value>
+	</context-param>
 	
 	
 </web-app>
