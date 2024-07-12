@@ -25,12 +25,13 @@ dto.setId(session.getAttribute("UserId").toString());
 // DB연결을 위해 DAO객체를 생성한다.
 BoardDAO dao = new BoardDAO(application);
 // 입력값이 저장된 DTO객체를 인수를 전달하여 insert쿼리문을 실행한다.
-// int iResult = dao.insertWrite(dto);
-int iResult =0;
-for(int i=1;i<=100;i++){
-	dto.setTitle(title+"-"+i);
-	iResult = dao.insertWrite(dto);
-}
+int iResult = dao.insertWrite(dto);
+// 더미데이터 100개 만들기 안쓸땐 주석
+// int iResult =0;	
+// for(int i=1;i<=100;i++){
+// 	dto.setTitle(title+"-"+i);
+// 	iResult = dao.insertWrite(dto);
+// }
 
 // 자원해제
 dao.close();
