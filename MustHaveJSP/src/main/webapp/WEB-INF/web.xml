@@ -103,5 +103,54 @@
 		<param-value>5</param-value>
 	</context-param>
 	
+	<!-- 서블릿 매핑 예제12-1 -->
+	<!-- 
+		웹애플리케이션으로 요청이 들어올때 url-pattern에 지정되었는지
+		확인하여 일치하면 해당 요청은 servlet-class에 지정된 서블릿 클래스로
+		전달한다. 이때 servlet-name에 지정한 이름을 통해 요청명과 서블릿을 
+		매핑한다. 즉 특정한 요청이 있을때 해당 요청을 전달하기 위한 서블릿 
+		클래스를 설정하는것을 "매핑"이라 한다.
+	 -->
+	<servlet>  <!-- 서블릿 등록 -->
+		<servlet-name>HelloServlet</servlet-name>	<!-- 서블릿 참조할 때 사용할 이름 -->
+		<servlet-class>servlet.HelloServlet</servlet-class>	<!-- 서블릿을 패키지포함 명시 -->
+	</servlet>	
+	<servlet-mapping>   <!-- 서블릿과 요청명(요청 URL) 매핑 -->
+		<servlet-name>HelloServlet</servlet-name>	<!-- <servlet>에서 사용할 이름과 동일 -->
+		<url-pattern>/12Servlet/HelloServlet.do</url-pattern>	<!-- 요청명으로 사용할 경로 -->
+	</servlet-mapping>
+	
+	<!-- 서블릿 매핑 2(예제 12-7) -->
+	<!-- 서블릿에서 즉시 요청에 대한 결과는 출력한다. -->
+	<servlet>
+		<servlet-name>DirectServletPrint</servlet-name>
+		<servlet-class>servlet.DirectServletPrint</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DirectServletPrint</servlet-name>
+		<url-pattern>/12Servlet/DirectServletPrint.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 회원인증을 위한 서블릿 매핑 -->
+	<servlet>
+		<servlet-name>MemberAuth</servlet-name>
+		<servlet-class>servlet.MemberAuth</servlet-class>
+		<!-- 
+			해당 서블릿 내에서만 사용할 수 있는 초기화 파라미터.
+			context-param으로 정의하는 컨테스트 초기화 파라미터의 경우
+			웹애플리케이션 전체에서 사용할 수 있는 전역상수라면, 해당
+			파라미터는 지역상수라고 할 수 있다.
+		 -->
+		 <!-- 서블릿에서 사용할 초기화 매개변수를 지정 
+		 관리자 아이디가 “nakja”임을 전달한 것입니다.` -->
+		<init-param>
+			<param-name>admin_id</param-name>
+			<param-value>nakja</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberAuth</servlet-name>
+		<url-pattern>/12Servlet/MemberAuth.mvc</url-pattern>
+	</servlet-mapping>
 	
 </web-app>

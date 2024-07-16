@@ -84,4 +84,28 @@ SELECT *
         FROM (SELECT * FROM board ORDER BY num DESC) Tb)
  WHERE rNum BETWEEN 1 AND 10;
 
+--  13장 파일업로드
+DROP TABLE myfile;
+create table myfile (
+    idx number primary key,
+    title varchar2(200) not null,
+    cate varchar2(100),
+    ofile varchar2(100) not null,
+    sfile varchar2(30) not null,
+    postdate date default sysdate not null
+);
+DESC myfile;
+
+DELETE * FROM myfile;
+SELECT * FROM myfile;
+
+
+
+
+
+
+
+
+
+
 
