@@ -34,12 +34,12 @@
 	    %>
 	        <tr>
 	        	<!--  DTO 객체의 게터를 사용 -->
-	            <td><%= f.getIdx() %></td>
-	            <td><%= f.getTitle() %></td>
-	            <td><%= f.getCate() %></td>
-	            <td><%= f.getOfile() %></td>
-	            <td><%= f.getSfile() %></td>
-	            <td><%= f.getPostdate() %></td>
+	            <td><%= f.getIdx() %> </td>
+	            <td><%= f.getTitle() %> </td>
+	            <td><%= f.getCate() %> </td>
+	            <td><%= f.getOfile() %> </td>
+	            <td><%= f.getSfile() %> </td>
+	            <td><%= f.getPostdate() %> </td>
 	            <!-- UTF-8 한글을 깨지지 않게 하기 위해 -->
 	            <td><a href="Download.jsp?oName=<%= URLEncoder.encode(f.getOfile(),"UTF-8") %>&sName=<%= URLEncoder.encode(f.getSfile(),"UTF-8") %>">[다운로드]</a></td>
 	        </tr>

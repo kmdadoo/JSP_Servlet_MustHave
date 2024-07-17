@@ -13,20 +13,21 @@
 			var속성을 사용하면 에러내용을 원하는 위치에 출력할 수 
 			있다. JSTL문법 오류는 catch되지 않는다.
 	 -->
-		<h4>자바 코드에서의 예외</h4>
+	 	<h4>자바 코드에서의 예외</h4>
 	    <%
 	    int num1 = 100;
 	    %>
-	    <!-- 예외를 <c:catch>가 잡아 eMessage에 저장 -->
-	    <c:catch var="eMessage">	
-	        <%
-	     	// 정수는 0으로 나누면 무한대가 되므로 연산불능 예외가 발생한다.
-	        int result = num1 / 0;
-	        %>
+		
+		<!-- 예외를 <c:catch/> 가 잡아 eMessage에 저장 -->
+		<c:catch var="eMessage">	
+        <%
+     	// 정수는 0으로 나누면 무한대가 되므로 연산불능 예외가 발생한다.
+        int result = num1 / 0;
+        %>
 	    </c:catch>
 	    예외 내용 : ${ eMessage }
 	    
-	    <h4>EL에서의 예외</h4>
+		<h4>EL에서의 예외</h4>
 	    <!-- 각각 변수를 선언 -->
 	    <c:set var="num2" value="200" />
 	    <!-- EL에서는 + 기호를 덧셈연산에만 사용한다. 즉 문자열을 연결하는

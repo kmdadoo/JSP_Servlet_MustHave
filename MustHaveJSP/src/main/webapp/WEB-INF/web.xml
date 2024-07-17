@@ -153,4 +153,29 @@
 		<url-pattern>/12Servlet/MemberAuth.mvc</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Model2방식의 자료실형 게시판 구하기 -->
+	<!-- 리스트(목록) 서블릿 매핑 -->
+	<servlet>
+		<servlet-name>MVCBoardList</servlet-name> <!-- 서블릭 이름 -->
+		<servlet-class>model2.mvcboard.ListController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MVCBoardList</servlet-name>
+		<url-pattern>/mvcboard/list.do</url-pattern> <!-- 요청명 -->
+	</servlet-mapping>
+	
+	<!-- 글쓰기로 진입하기 위한 매핑 (예제 14-7) -->
+	<servlet>
+    <servlet-name>MVCBoardWrite</servlet-name>
+    <servlet-class>model2.mvcboard.WriteController</servlet-class>
+	    <multipart-config>
+	      <max-file-size>1048576</max-file-size> <!-- 개별파일 최대 크기 : 1MB -->
+	      <max-request-size>10485760</max-request-size> <!-- 전체 파일 최대 크기 : 10MB -->
+	    </multipart-config>
+	</servlet>  
+  	<servlet-mapping>
+    	<servlet-name>MVCBoardWrite</servlet-name>
+    	<url-pattern>/mvcboard/write.do</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
