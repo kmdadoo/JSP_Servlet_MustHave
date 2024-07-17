@@ -100,33 +100,34 @@ public class FileUtil
 		return listFileName;			
 	}
 	
-	//파일 다운로드
+	// 14-17 파일 다운로드
+	// 명시한 파일을 찾아 다운로드합니다.
 	public static void download(HttpServletRequest req, HttpServletResponse resp,
             String directory, String sfileName, String ofileName) 
 	{
         String sDirectory = req.getServletContext().getRealPath(directory);
         try {
-            // 파일을 찾아 입력 스트림 생성
+        	// 파일을 찾아 입력 스트림 생성
             File file = new File(sDirectory, sfileName);
             InputStream iStream = new FileInputStream(file);
 
             // 한글 파일명 깨짐 방지
-            String client = req.getHeader("User-Agent");
-            if (client.indexOf("WOW64") == -1) {
+            String client = req.getHeader("User-Agent");	// 웹브라우져 종류
+            if (client.indexOf("WOW64") == -1) {	// 익스플로러
                 ofileName = new String(ofileName.getBytes("UTF-8"), "ISO-8859-1");
             }
             else {
                 ofileName = new String(ofileName.getBytes("KSC5601"), "ISO-8859-1");
             }
 
-            // 파일 다운로드용 응답 헤더 설정
+            // 파일 다운로드 응답 헤더 설정
             resp.reset();
             resp.setContentType("application/octet-stream");
             resp.setHeader("Content-Disposition",
                            "attachment; filename=\"" + ofileName + "\"");
             resp.setHeader("Content-Length", "" + file.length() );
 
-            //out.clear();  // 출력 스트림 초기화
+            //out.clear();  // 출력 스트림 초기화 서블릿에서는 예외가 발생하지 않아 주석처리
 
             // response 내장 객체로부터 새로운 출력 스트림 생성
             OutputStream oStream = resp.getOutputStream();
@@ -138,7 +139,7 @@ public class FileUtil
                 oStream.write(b, 0, readBuffer);
             }
 
-            // 입/출력 스트림 닫음
+            // 입출력 스크림 닫음
             iStream.close();
             oStream.close();
         }
@@ -151,14 +152,19 @@ public class FileUtil
             e.printStackTrace();
         }
     }
-
-    //파일 삭제 
-    public static void deleteFile(HttpServletRequest req,
-            String directory, String filename) {
+	
+	// 파일 삭제를 위한 메서드
+	public static void deleteFile(HttpServletRequest req,
+            String directory, String filename) 
+	{
+		// 물리적 경로와 파일명을 통해 File객체를 생성한다.
         String sDirectory = req.getServletContext().getRealPath(directory);
         File file = new File(sDirectory + File.separator + filename);
+        // 해당 경로에 파일이 존재하면...
         if (file.exists()) {
+        	// 파일을 삭제한다.
             file.delete();
         }
     }
+
 }
